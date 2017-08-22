@@ -1,0 +1,10 @@
+#!/bin/bash
+
+for file in ~/.{aliases,dockerfunc,exports,path}; do
+  if [[ -r "${file}" ]] && [[ -f "${file}" ]]; then
+    # shellcheck source=/dev/null
+    source "${file}"
+  fi
+done
+
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh

@@ -1,0 +1,35 @@
+#!/bin/bash
+
+alias ls="ls -G"
+alias ll="ls -lh"
+alias la="ls -lAh"
+
+if echo | grep -q --color=tty ""; then
+  alias grep="grep --color=tty"
+fi
+
+if [[ $(command -v nvim) ]]; then
+  alias vim=nvim
+fi
+
+if [[ $(command -v xclip) ]]; then
+  alias pbcopy="xclip -selection clipboard"
+  alias pbpaste="xclip -selection clipboard -o"
+fi
+
+if [[ $(command -v xdg-open) ]]; then
+  alias open="xdg-open"
+fi
+
+alias gst="git status"
+
+alias pu="pushd"
+alias po="popd"
+
+alias view="vim -R"
+
+# Might be run before autojump.sh is sourced,
+# in which case `j` won't be a command yet.
+if [[ $(command -v autojump) ]]; then
+  alias z="j >/dev/null 2>&1"
+fi

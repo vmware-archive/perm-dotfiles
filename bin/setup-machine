@@ -1,0 +1,142 @@
+#!/bin/bash
+
+set -eu
+
+# TODO:
+# - grant flycut, shiftit, etc accessibility perms
+# - add flycut, shiftit, etc to login items
+
+TAPS=(
+  caskroom/cask
+  cloudfoundry/tap
+)
+BREW_PKGS=(
+  autojump
+  bosh-cli
+  cask
+  cf-cli
+  coreutils
+  direnv
+  fzf
+  git
+  go
+  htop
+  mariadb
+  neovim
+  postgres
+  python
+  python3
+  shellcheck
+  the_silver_searcher
+  xhyve
+  zsh
+  zsh-completions
+)
+CASK_PKGS=(
+  docker-toolbox
+  google-chrome
+  firefox
+  flycut
+  iterm2
+  shiftit
+  slack
+)
+SERVICES=(
+  mariadb
+  postgres
+)
+REPOS=(
+  iredelmeier/vimconfig
+)
+
+is_brew_installed() {
+  brew ls --versions "${1}" > /dev/null
+}
+
+install_brew() {
+  if [[ "$(command -v brew)" > /dev/null ]]; then
+    echo "Homebrew is already installed. Skipping homebrew installation..."
+  else
+    echo "Homebrew is not installed. Installing homebrew..."
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    echo "Installed homebrew"
+  fi
+}
+
+brew_packages() {
+  echo "Upgrading existing brew packages..."
+  brew upgrade
+  echo "Upgraded brew packages"
+
+  echo "Installing/upgrading brew packages..."
+
+  for tap in "${TAPS[@]}"; do
+    brew tap "${tap}"
+  done
+  for pkg in "${BREW_PKGS[@]}"; do
+    if ! is_brew_installed "${pkg}"; then
+      brew reinstall -f "${pkg}"
+    fi
+  done
+  for pkg in "${CASK_PKGS[@]}"; do
+    if ! is_brew_installed "${pkg}"; then
+      brew cask reinstall -f "${pkg}"
+    fi
+  done
+
+  echo "Finished installing/upgrading brew packages"
+}
+
+start_services() {
+  echo "Adding startup services..."
+  for service in "${SERVICES[@]}"; do
+    brew services start "${service}"
+  done
+  echo "Added startup services"
+}
+
+extra_install_steps() {
+  echo "Finalizing dependency installation..."
+  /usr/local/opt/fzf/install --completion --key-bindings --no-update-rc
+  pip2 install neovim
+  pip3 install neovim
+  pip2 install ipython
+  pip3 install ipython
+  echo "Finished finalizing dependency installation"
+}
+
+setup_defaults() {
+  echo "Setting up defaults..."
+  # Make zsh the user's default shell
+  sudo dscl . -create "/Users/${USER}" UserShell "$(which zsh)"
+  echo "Finished setting up defaults"
+}
+
+setup_worskpace() {
+  local workspace
+  local repo_name
+
+  echo "Setting up workspace..."
+  workspace="${HOME}/workspace"
+  mkdir -p "${workspace}"
+
+  for repo in "${REPOS[@]}"; do
+    repo_name="$(echo "${repo}" | cut -d "/" -f 2)"
+    if [[ ! -e "${workspace}/${repo_name}" ]]; then
+      git clone "git@github.com:${repo}" "${workspace}/${repo_name}"
+    fi
+  done
+
+  echo "Finished setting up repos"
+}
+
+main() {
+  install_brew
+  brew_packages
+  extra_install_steps
+  start_services
+  setup_defaults
+  setup_workspace
+}
+
+main

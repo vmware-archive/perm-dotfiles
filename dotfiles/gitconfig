@@ -1,0 +1,21 @@
+[alias]
+	br = branch
+	branches = branch -a
+	ci = commit
+	cp = cherry-pick
+	co = checkout
+	lol = log --pretty=oneline --abbrev-commit --graph --decorate
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	remotes = remote -v
+	root = rev-parse --show-toplevel
+	s = status -s
+	tags = tag -l
+
+[core]
+      	excludesfile = ~/.gitignore
+
+[push]
+	default = simple
+[user]
+	email = iredelmeier@gmail.com
+	name = Isobel Redelmeier

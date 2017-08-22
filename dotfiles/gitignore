@@ -1,0 +1,14 @@
+.agignore
+.envrc
+.idea
+
+*.o
+*.a
+*.so
+*.pyc
+
+tmux*.log
+Session.vim
+npm-debug.log
+
+tags
