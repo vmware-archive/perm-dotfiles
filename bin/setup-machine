@@ -6,6 +6,7 @@ set -eu
 # - grant flycut, shiftit, etc accessibility perms
 # - add flycut, shiftit, etc to login items
 
+WORKSPACE="${HOME}/workspace"
 TAPS=(
   caskroom/cask
   cloudfoundry/tap
@@ -36,9 +37,10 @@ BREW_PKGS=(
 )
 CASK_PKGS=(
   docker-toolbox
-  google-chrome
   firefox
   flycut
+  gogland
+  google-chrome
   iterm2
   mendeley-desktop
   shiftit
@@ -50,6 +52,7 @@ SERVICES=(
 )
 REPOS=(
   iredelmeier/vim-config
+  pivotal/pivotal_ide_prefs
 )
 
 is_brew_installed() {
@@ -57,7 +60,7 @@ is_brew_installed() {
 }
 
 install_brew() {
-  if [[ "$(command -v brew)" > /dev/null ]]; then
+  if command -v brew > /dev/null; then
     echo "Homebrew is already installed. Skipping homebrew installation..."
   else
     echo "Homebrew is not installed. Installing homebrew..."
@@ -100,11 +103,11 @@ start_services() {
 
 extra_install_steps() {
   echo "Finalizing dependency installation..."
-  /usr/local/opt/fzf/install --completion --key-bindings --no-update-rc
-  pip2 install neovim
-  pip3 install neovim
-  pip2 install ipython
-  pip3 install ipython
+  install_lastpass
+  setup_fzf
+  setup_neovim
+  setup_ipython
+  setup_ide_prefs
   echo "Finished finalizing dependency installation"
 }
 
@@ -116,30 +119,54 @@ setup_defaults() {
 }
 
 setup_workspace() {
-  local workspace
   local repo_name
 
   echo "Setting up workspace..."
-  workspace="${HOME}/workspace"
-  mkdir -p "${workspace}"
+  mkdir -p "${WORKSPACE}"
 
   for repo in "${REPOS[@]}"; do
     repo_name="$(echo "${repo}" | cut -d "/" -f 2)"
-    if [[ ! -e "${workspace}/${repo_name}" ]]; then
-      git clone "git@github.com:${repo}" "${workspace}/${repo_name}"
+    if [[ ! -e "${WORKSPACE}/${repo_name}" ]]; then
+      git clone "git@github.com:${repo}" "${WORKSPACE}/${repo_name}"
     fi
   done
 
   echo "Finished setting up repos"
 }
 
+install_lastpass() {
+  if ! is_brew_installed lastpass-cli; then
+    brew install lastpass-cli --with-pinentry
+  fi
+}
+
+setup_fzf() {
+  /usr/local/opt/fzf/install --completion --key-bindings --no-update-rc
+}
+
+setup_neovim() {
+  pip2 install neovim
+  pip3 install neovim
+}
+
+setup_ipython() {
+  pip2 install ipython
+  pip3 install ipython
+}
+
+setup_ide_prefs() {
+  pushd "${WORKSPACE}/pivotal_ide_prefs" > /dev/null
+    cli/bin/ide_prefs install --ide=gogland
+  popd > /dev/null
+}
+
 main() {
   install_brew
   brew_packages
+  setup_workspace
   extra_install_steps
   start_services
   setup_defaults
-  setup_workspace
 }
 
 main

@@ -7,4 +7,5 @@ for file in ~/.{aliases,dockerfunc,exports,path}; do
   fi
 done
 
+# shellcheck source=/dev/null
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
