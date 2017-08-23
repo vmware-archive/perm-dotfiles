@@ -15,7 +15,7 @@ dotfiles:
 	done
 
 setup:
-	$(CWD)/bin/setup-workstation
+	$(CWD)/bin/setup-machine
 
 test:
 	$(CWD)/test.sh
