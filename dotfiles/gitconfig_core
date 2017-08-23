@@ -1,21 +1,28 @@
+# Split into separate file due to git-duet
+# Add this to ~/.gitconfig:
+#
+# [include]
+#   path = ~/.gitconfig_core
+
 [alias]
 	br = branch
 	branches = branch -a
-	ci = commit
-	cp = cherry-pick
+	ci = duet-commit
 	co = checkout
+  commit = duet-commit
+	cp = cherry-pick
+  duet = duet -g
 	lol = log --pretty=oneline --abbrev-commit --graph --decorate
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	remotes = remote -v
+  revert = duet-revert
 	root = rev-parse --show-toplevel
 	s = status -s
+  solo = solo -g
 	tags = tag -l
 
 [core]
-      	excludesfile = ~/.gitignore
+  excludesfile = ~/.gitignore
 
 [push]
 	default = simple
-[user]
-	email = iredelmeier@gmail.com
-	name = Isobel Redelmeier
