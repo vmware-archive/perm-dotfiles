@@ -17,3 +17,5 @@ export DOCKER_BIN_PATH="${HOME}/.docker-bin"
 if [[ -r "${DOCKER_BIN_PATH}" ]] && [[ -d "${DOCKER_BIN_PATH}" ]]; then
   export PATH="${DOCKER_BIN_PATH}:${PATH}"
 fi
+
+export CF_PLUGIN_HOME="${HOME}"

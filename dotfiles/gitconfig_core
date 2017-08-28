@@ -9,6 +9,7 @@
 	branches = branch -a
 	ci = duet-commit
 	co = checkout
+	st = status
   commit = duet-commit
 	cp = cherry-pick
   duet = duet -g
