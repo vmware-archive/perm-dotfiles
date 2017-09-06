@@ -18,19 +18,28 @@ BREW_PKGS=(
   cask
   cf-cli
   coreutils
+  credhub-cli
+  dep
   direnv
   fzf
   git
   git-duet
   go
   htop
+  jq
   mariadb
   neovim
   postgres
+  protobuf
   python
   python3
+  ruby-install
   shellcheck
+  signify-osx
+  terraform
   the_silver_searcher
+  thefuck
+  tig
   xhyve
   zsh
   zsh-completions
@@ -41,10 +50,13 @@ CASK_PKGS=(
   flycut
   gogland
   google-chrome
+  google-cloud-sdk
   iterm2
   mendeley-desktop
+  rubymine
   shiftit
   slack
+  textmate
 )
 SERVICES=(
   mariadb
@@ -53,6 +65,9 @@ SERVICES=(
 REPOS=(
   iredelmeier/vim-config
   pivotal/pivotal_ide_prefs
+)
+RUBY_VERSIONS=(
+  "ruby 2.3.4"
 )
 
 is_brew_installed() {
@@ -103,6 +118,7 @@ start_services() {
 
 extra_install_steps() {
   echo "Finalizing dependency installation..."
+  install_bbl
   install_lastpass
   setup_fzf
   setup_neovim
@@ -134,10 +150,22 @@ setup_workspace() {
   echo "Finished setting up repos"
 }
 
+install_bbl() {
+  if ! is_brew_installed bbl; then
+    brew install bbl --without-bosh2
+  fi
+}
+
 install_lastpass() {
   if ! is_brew_installed lastpass-cli; then
     brew install lastpass-cli --with-pinentry
   fi
+}
+
+install_ruby() {
+  for version in "${RUBY_VERSIONS[@]}"; do
+    ruby-install "$version" --no-reinstall
+  done
 }
 
 setup_fzf() {
@@ -161,8 +189,9 @@ setup_ide_prefs() {
 }
 
 main() {
-  install_brew
-  brew_packages
+  # install_brew
+  # brew_packages
+  # install_ruby
   setup_workspace
   extra_install_steps
   start_services
