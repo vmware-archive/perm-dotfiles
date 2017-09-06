@@ -1,6 +1,7 @@
 .agignore
 .envrc
 .idea
+.ignore
 
 *.o
 *.a

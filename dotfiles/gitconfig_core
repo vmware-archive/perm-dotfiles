@@ -5,25 +5,29 @@
 #   path = ~/.gitconfig_core
 
 [alias]
-	br = branch
-	branches = branch -a
-	ci = duet-commit
-	co = checkout
-	st = status
+  br = branch
+  branches = branch -a
+  ci = duet-commit
+  co = checkout
+  st = status
   commit = duet-commit
-	cp = cherry-pick
+  cp = cherry-pick
   duet = duet -g
-	lol = log --pretty=oneline --abbrev-commit --graph --decorate
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	remotes = remote -v
+  lol = log --pretty=oneline --abbrev-commit --graph --decorate
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  remotes = remote -v
   revert = duet-revert
-	root = rev-parse --show-toplevel
-	s = status -s
+  root = rev-parse --show-toplevel
+  s = status -s
   solo = solo -g
-	tags = tag -l
+  tags = tag -l
 
 [core]
   excludesfile = ~/.gitignore
 
 [push]
-	default = simple
+  default = simple
+
+[url "git@github.com:"]
+  pushInsteadOf = https://github.com/
+  pushInsteadOf = git://github.com/
