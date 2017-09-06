@@ -64,6 +64,10 @@ SERVICES=(
 )
 REPOS=(
   iredelmeier/vim-config
+  pivotal-cf/perm-ci
+  pivotal-cf/perm-deployments
+  pivotal-cf/perm-rb
+  pivotal-cf/perm-release
   pivotal/pivotal_ide_prefs
 )
 RUBY_VERSIONS=(
