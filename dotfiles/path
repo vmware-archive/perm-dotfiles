@@ -19,3 +19,5 @@ if [[ -r "${DOCKER_BIN_PATH}" ]] && [[ -d "${DOCKER_BIN_PATH}" ]]; then
 fi
 
 export CF_PLUGIN_HOME="${HOME}"
+
+export PATH="/Users/pivotal/.rubies/ruby-2.3.4/bin:${PATH}"
