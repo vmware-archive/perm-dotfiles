@@ -1,0 +1,81 @@
+#!/bin/bash
+
+set -eu
+set -o pipefail
+
+CREDENTIALS_DIR="${HOME}/workspace/perm-ci-credentials"
+CRYPTDO_PASSWORD_NAME="Perm CI Cryptdo Password"
+
+function ensure_lpass() {
+  if ! command -v lpass > /dev/null; then
+    echo "lpass must be installed"
+    exit 1
+  fi
+
+  if ! lpass status > /dev/null; then
+    echo "Not logged in to lastpass"
+    echo "Please run \`lpass login <email>\`"
+    exit 1
+  fi
+}
+
+function ensure_cryptdo() {
+  if ! command -v cryptdo > /dev/null; then
+    echo "cryptdo must be installed"
+    exit 1
+  fi
+}
+
+function decrypt_state_files() {
+  local cryptdo_password
+
+  pushd "$CREDENTIALS_DIR" > /dev/null
+    if [[ ! -f bbl-state.json || ! -f director-vars-store.json ]]; then
+      ensure_lpass
+      ensure_cryptdo
+
+      cryptdo_password="$(lpass show "$CRYPTDO_PASSWORD_NAME" --password)"
+
+      cryptdo -p "$cryptdo_password" -- cat > /dev/null
+    fi
+  popd > /dev/null
+}
+
+function setup_bosh_tunnel() {
+  local jumpbox_key
+  local tmpfile
+  local bosh_ip
+
+  if ! nc -z localhost 5000 > /dev/null 2>&1; then
+    bosh_ip="$(bbl director-address --state-dir "${CREDENTIALS_DIR}" | grep -o "[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}")"
+    tmpfile="$(mktemp)"
+    jumpbox_key="$(bosh int "${CREDENTIALS_DIR}/director-vars-store.json" --path /jumpbox_ssh/private_key)"
+    echo "$jumpbox_key" > "$tmpfile"
+    chmod 600 "$tmpfile"
+    # shellcheck disable=SC2029
+    ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -D 5000 -fNC -i "$tmpfile" "jumpbox@${bosh_ip}"
+    rm "$tmpfile"
+  fi
+}
+
+function setup_bosh_env() {
+  local bosh_client_secret
+  local bosh_ca_cert
+
+  bosh_client_secret="$(bosh int "${CREDENTIALS_DIR}/director-vars-store.json" --path /admin_password)"
+  bosh_ca_cert="$(bosh int "${CREDENTIALS_DIR}/director-vars-store.json" --path /director_ssl/ca)"
+
+  export BOSH_ENVIRONMENT=marie-antoinette
+  export BOSH_CLIENT=admin
+  export BOSH_CLIENT_SECRET="$bosh_client_secret"
+  export BOSH_CA_CERT="$bosh_ca_cert"
+  export BOSH_ALL_PROXY="socks5://localhost:5000"
+}
+
+function main() {
+  decrypt_state_files
+  setup_bosh_tunnel
+  setup_bosh_env
+}
+
+main
