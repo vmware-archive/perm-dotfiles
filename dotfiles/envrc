@@ -72,10 +72,17 @@ function setup_bosh_env() {
   export BOSH_ALL_PROXY="socks5://localhost:5000"
 }
 
+function setup_perm_paths() {
+  export PERM_RB_PATH="${HOME}/workspace/perm-rb"
+  export PERM_GOPATH="${HOME}/workspace/perm-release"
+}
+
 function main() {
   decrypt_state_files
   setup_bosh_tunnel
   setup_bosh_env
+
+  setup_perm_paths
 }
 
 main
