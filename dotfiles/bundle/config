@@ -1,0 +1,7 @@
+---
+BUNDLE_LOCAL__CF-PERM: "/Users/pivotal/workspace/perm-rb"
+BUNDLE_CACHE_ALL_PLATFORMS: "true"
+BUNDLE_SPECIFIC_PLATFORM: "false"
+BUNDLE_CACHE_ALL: "true"
+BUNDLE_NO_INSTALL: "true"
+BUNDLE_CACHE_PATH: "../.bundle/capi-cache"

@@ -31,6 +31,7 @@ BREW_PKGS=(
   neovim
   postgres
   protobuf
+  proxychains-ng
   python
   python3
   ruby-install
@@ -40,6 +41,7 @@ BREW_PKGS=(
   the_silver_searcher
   thefuck
   tig
+  watch
   xhyve
   zsh
   zsh-completions
@@ -63,6 +65,7 @@ SERVICES=(
   postgres
 )
 REPOS=(
+  cloudfoundry/cloud_controller_ng
   iredelmeier/vim-config
   pivotal-cf/perm-ci
   pivotal-cf/perm-deployments
