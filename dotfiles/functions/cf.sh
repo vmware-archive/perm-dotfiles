@@ -40,7 +40,6 @@ function deploy_cf() (
 function upload_releases_and_deploy_cf() (
   set -eux
 
-  upload_bpm_release
   create_and_upload_capi_release_for_perm
   create_and_upload_perm_release
   deploy_cf
