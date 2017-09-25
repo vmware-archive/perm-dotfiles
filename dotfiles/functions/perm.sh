@@ -23,7 +23,7 @@ function upload_perm_release() (
 )
 
 function create_and_upload_perm_release() (
-  set -eux
+  set -eu
 
   create_perm_release
   upload_perm_release

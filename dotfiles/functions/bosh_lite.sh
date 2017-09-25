@@ -37,7 +37,6 @@ target_bosh() {
 }
 
 function claim_bosh_lite() {
-  set -x
   env_dir=$(
     set -e
     function msg {

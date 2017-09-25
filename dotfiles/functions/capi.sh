@@ -13,7 +13,7 @@ CWD="$(dirname -- "${0}")"
 source "${CWD}/bosh.sh"
 
 function create_capi_release_for_perm() (
-  set -eux
+  set -eu
 
   rm -rf "$CAPI_RELEASE_DIR"
   cp -R "$CAPI_RELEASE_REPO" "$CAPI_RELEASE_DIR"
@@ -22,23 +22,24 @@ function create_capi_release_for_perm() (
   cat << EOF > "${CAPI_RELEASE_DIR}/src/cloud_controller_ng/.bundle/config"
 ---
 BUNDLE_LOCAL__CF-PERM: "/Users/pivotal/workspace/perm-rb"
-BUNDLE_CACHE_ALL_PLATFORMS: "false"
-BUNDLE_SPECIFIC_PLATFORM: "true"
-BUNDLE_CACHE_ALL: "false"
-BUNDLE_CACHE_PATH: "../.bundle/capi-cache"
+BUNDLE_CACHE_ALL_PLATFORMS: "true"
+BUNDLE_CACHE_ALL: "true"
+
+BUNDLE_SPECIFIC_PLATFORM: "false"
+BUNDLE_NO_INSTALL: "true"
 EOF
 
   RELEASE_NAME="$CAPI_RELEASE_NAME" RELEASE_DIR="$CAPI_RELEASE_DIR" create_release
 )
 
 function upload_capi_release_for_perm() (
-  set -eux
+  set -eu
 
   RELEASE_DIR="$CAPI_RELEASE_DIR" upload_release
 )
 
 function create_and_upload_capi_release_for_perm() (
-  set -eux
+  set -eu
 
   create_capi_release_for_perm
   upload_capi_release_for_perm

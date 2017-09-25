@@ -13,7 +13,7 @@ source "${CWD}/capi.sh"
 source "${CWD}/perm.sh"
 
 function deploy_cf() (
-  set -eux
+  set -eu
 
   local bosh_deployment="${BOSH_DEPLOYMENT:-cf}"
   local system_domain="${SYSTEM_DOMAIN:-"${BOSH_LITE_DOMAIN}"}"
@@ -38,7 +38,7 @@ function deploy_cf() (
 )
 
 function upload_releases_and_deploy_cf() (
-  set -eux
+  set -eu
 
   create_and_upload_capi_release_for_perm
   create_and_upload_perm_release
@@ -46,7 +46,7 @@ function upload_releases_and_deploy_cf() (
 )
 
 function delete_orgs() (
-  set -eux
+  set -eu
 
   echo "Warning! All of your orgs and everything in them will be deleted!"
 
