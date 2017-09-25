@@ -130,7 +130,7 @@ EOF
     }
 
     function commit_and_push() {
-      git ci --quiet --message "manually claim ${env} on ${HOSTNAME} [nostory]" --no-verify
+      git ci -n --quiet --message "manually claim ${env} on ${HOSTNAME} [nostory]" --no-verify
       msg "Pushing reservation to $( basename "$PWD" )..."
       git push --quiet
     }
@@ -190,7 +190,7 @@ function unclaim_bosh_lite() {
       # trigger destroy-bosh-lite job
       date +%s >| .trigger-bosh-lites-destroy && git add .trigger-bosh-lites-destroy
 
-      git ci --quiet -m"releasing $env on ${HOSTNAME} [nostory]" --no-verify
+      git ci -n --quiet -m"releasing $env on ${HOSTNAME} [nostory]" --no-verify
       echo "Pushing the release commit to $( basename "$PWD" )..."
       git push --quiet
     }

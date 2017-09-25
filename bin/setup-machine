@@ -58,6 +58,7 @@ CASK_PKGS=(
   rubymine
   shiftit
   slack
+  spotify
   textmate
 )
 SERVICES=(
