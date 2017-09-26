@@ -35,7 +35,7 @@ EOF
 function upload_capi_release_for_perm() (
   set -eu
 
-  RELEASE_DIR="$CAPI_RELEASE_DIR" upload_release
+  RELEASE_NAME="$CAPI_RELEASE_NAME" RELEASE_DIR="$CAPI_RELEASE_DIR" upload_release
 )
 
 function create_and_upload_capi_release_for_perm() (

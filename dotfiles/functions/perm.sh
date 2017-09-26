@@ -19,7 +19,7 @@ function create_perm_release() (
 function upload_perm_release() (
   set -eu
 
-  RELEASE_DIR="$PERM_RELEASE_REPO" upload_release
+  RELEASE_NAME="$PERM_RELEASE_NAME" RELEASE_DIR="$PERM_RELEASE_REPO" upload_release
 )
 
 function create_and_upload_perm_release() (
