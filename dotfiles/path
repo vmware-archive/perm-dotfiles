@@ -20,4 +20,4 @@ fi
 
 export CF_PLUGIN_HOME="${HOME}"
 
-export PATH="/Users/pivotal/.rubies/ruby-2.3.4/bin:${PATH}"
+export PATH="/Users/pivotal/.rubies/ruby-2.4.2/bin:${PATH}"
