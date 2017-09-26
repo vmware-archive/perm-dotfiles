@@ -75,7 +75,6 @@ REPOS=(
   pivotal/pivotal_ide_prefs
 )
 RUBY_VERSIONS=(
-  "ruby 2.3.4"
   "ruby 2.4.2"
 )
 
