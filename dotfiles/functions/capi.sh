@@ -18,6 +18,12 @@ function create_capi_release_for_perm() (
   rm -rf "$CAPI_RELEASE_DIR"
   cp -R "$CAPI_RELEASE_REPO" "$CAPI_RELEASE_DIR"
 
+  # Ensures that version numbers are synced correctly
+  rm -rf "${CAPI_RELEASE_DIR}/.dev_builds"
+  rm -rf "${CAPI_RELEASE_DIR}/dev_releases"
+  ln -s "${CAPI_RELEASE_REPO}/.dev_builds" "${CAPI_RELEASE_DIR}/.dev_builds"
+  ln -s "${CAPI_RELEASE_REPO}/dev_releases" "${CAPI_RELEASE_DIR}/dev_releases"
+
   mkdir -p "${CAPI_RELEASE_DIR}/src/cloud_controller_ng/.bundle"
   cat << EOF > "${CAPI_RELEASE_DIR}/src/cloud_controller_ng/.bundle/config"
 ---
