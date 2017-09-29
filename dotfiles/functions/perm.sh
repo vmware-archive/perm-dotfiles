@@ -57,8 +57,9 @@ function make_perm_certs() (
     --output-json \
     --name "$tls_cert_name" \
     --type certificate \
-    --is-ca \
+    --ca "$ca_name" \
     --common-name localhost \
+    --alternative-name localhost \
     --alternative-name 127.0.0.1 \
     --ext-key-usage client_auth \
     --ext-key-usage server_auth > /dev/null
@@ -66,6 +67,16 @@ function make_perm_certs() (
   credhub get -n "$ca_name" --output-json | jq -re .value.certificate > "$PERM_CA_PATH"
   credhub get -n "$tls_cert_name" --output-json | jq -re .value.certificate > "$PERM_TLS_CERT_PATH"
   credhub get -n "$tls_cert_name" --output-json | jq -re .value.private_key > "$PERM_TLS_KEY_PATH"
+)
+
+function install_perm() (
+  set -eu
+
+  echo "Installing perm..."
+  # shellcheck source=/dev/null
+  source "${PERM_RELEASE_REPO}/.envrc"
+  go install code.cloudfoundry.org/perm/cmd/perm
+  echo "Installed perm"
 )
 
 function run_perm() (
@@ -77,8 +88,16 @@ function run_perm() (
     make_perm_certs
   fi
 
+  echo "Starting perm..."
   "${PERM_RELEASE_REPO}/bin/perm" \
     --log-level "$log_level" \
     --tls-certificate "$PERM_TLS_CERT_PATH" \
     --tls-key "$PERM_TLS_KEY_PATH"
+)
+
+function install_and_run_perm() (
+  set -eu
+
+  install_perm
+  run_perm
 )
