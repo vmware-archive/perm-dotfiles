@@ -25,16 +25,17 @@ function deploy_cf() (
   BOSH_DEPLOYMENT="$bosh_deployment"
 
   bosh -n \
-    deploy ~/workspace/cf-deployment/cf-deployment.yml \
+    deploy --skip-drain ~/workspace/cf-deployment/cf-deployment.yml \
     -v system_domain="$system_domain" \
     -v perm_version="$perm_version" \
     -o "${CF_DEPLOYMENT_REPO}/operations/bosh-lite.yml" \
     -o "${CF_DEPLOYMENT_REPO}/operations/bypass-cc-bridge.yml" \
     -o "${CAPI_CI_REPO}/cf-deployment-operations/use-latest-stemcell.yml" \
     -o "${CAPI_CI_REPO}/cf-deployment-operations/skip-cert-verify.yml" \
-    -o "${CAPI_CI_REPO}/cf-deployment-operations/use-latest-capi.yml" \
+    -o "${PERM_CI_REPO}/cf-deployment-operations/add-bpm.yml" \
     -o "${PERM_CI_REPO}/cf-deployment-operations/add-perm.yml" \
-    -o "${PERM_CI_REPO}/cf-deployment-operations/add-bpm.yml"
+    -o "${PERM_CI_REPO}/cf-deployment-operations/minimal.yml" \
+    -o "${CAPI_CI_REPO}/cf-deployment-operations/use-latest-capi.yml"
 )
 
 function upload_releases_and_deploy_cf() (
