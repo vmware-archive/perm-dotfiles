@@ -49,7 +49,7 @@ function run_cats() (
   local system_domain
   local num_nodes
 
-  num_nodes="${NUM_NODES:-8}"
+  num_nodes="${NUM_NODES:-20}"
   system_domain="${SYSTEM_DOMAIN:-"${BOSH_LITE_DOMAIN:-}"}"
   GOPATH="${GOPATH_GLOBAL:-"${GOPATH}"}"
 
