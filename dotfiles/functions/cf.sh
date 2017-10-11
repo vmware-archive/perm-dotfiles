@@ -16,25 +16,25 @@ function deploy_cf() (
   set -eu
 
   local bosh_deployment="${BOSH_DEPLOYMENT:-cf}"
-  local system_domain="${SYSTEM_DOMAIN:-"${BOSH_LITE_DOMAIN}"}"
+  local system_domain="${SYSTEM_DOMAIN:-"${BOSH_LITE_DOMAIN:-}"}"
   local perm_version="${PERM_VERSION:-latest}"
 
   : "${BOSH_ENVIRONMENT:?"Need to set BOSH_ENVIRONMENT"}"
   : "${system_domain:?"Need to set SYSTEM_DOMAIN or BOSH_LITE_DOMAIN"}"
 
-  BOSH_DEPLOYMENT="$bosh_deployment"
+  export BOSH_DEPLOYMENT="$bosh_deployment"
 
   bosh -n \
     deploy --skip-drain ~/workspace/cf-deployment/cf-deployment.yml \
     -v system_domain="$system_domain" \
     -v perm_version="$perm_version" \
-    -o "${CF_DEPLOYMENT_REPO}/operations/bosh-lite.yml" \
-    -o "${CF_DEPLOYMENT_REPO}/operations/bypass-cc-bridge.yml" \
-    -o "${CAPI_CI_REPO}/cf-deployment-operations/use-latest-stemcell.yml" \
     -o "${CAPI_CI_REPO}/cf-deployment-operations/skip-cert-verify.yml" \
+    -o "${CAPI_CI_REPO}/cf-deployment-operations/use-latest-stemcell.yml" \
+    -o "${CF_DEPLOYMENT_REPO}/operations/use-compiled-releases.yml" \
+    -o "${CF_DEPLOYMENT_REPO}/operations/bosh-lite.yml" \
     -o "${PERM_CI_REPO}/cf-deployment-operations/add-bpm.yml" \
     -o "${PERM_CI_REPO}/cf-deployment-operations/add-perm.yml" \
-    -o "${PERM_CI_REPO}/cf-deployment-operations/minimal.yml" \
+    -o "${PERM_CI_REPO}/cf-deployment-operations/add-perm-monitor-api-sidecar.yml" \
     -o "${CAPI_CI_REPO}/cf-deployment-operations/use-latest-capi.yml"
 )
 
