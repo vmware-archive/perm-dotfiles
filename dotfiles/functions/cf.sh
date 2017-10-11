@@ -78,6 +78,7 @@ function run_cats() (
   "apps_domain": "${system_domain}",
   "admin_user": "${admin_username}",
   "admin_password": "${admin_password}",
+  "backend": "diego",
   "skip_ssl_validation": true,
   "use_http": false,
   "include_apps": true,
