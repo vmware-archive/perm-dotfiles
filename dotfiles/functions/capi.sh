@@ -12,6 +12,8 @@ CWD="$(dirname -- "${0}")"
 # shellcheck source=/dev/null
 source "${CWD}/bosh.sh"
 
+# Because of CAPI's `pre_packaging` usage, we need to use a different bundle config
+# for the release than we do for development :(
 function create_capi_release_for_perm() (
   set -eu
 

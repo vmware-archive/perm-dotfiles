@@ -41,7 +41,7 @@ function deploy_cf() (
 )
 
 function run_cats() (
-  set -eux
+  set -eu
 
   local admin_password
   local admin_username
