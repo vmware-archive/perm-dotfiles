@@ -8,8 +8,15 @@ function setup_perm_paths() {
   export PERM_GOPATH="${HOME}/workspace/perm-release"
 }
 
+function setup_perm_client_env() {
+  export PERM_TEST_SQL_DB_USERNAME="root"
+  export PERM_TEST_SQL_DB_PASSWORD="password"
+  export PERM_TEST_PATH="/Users/pivotal/workspace/perm-release/bin/perm"
+}
+
 function main() {
   setup_perm_paths
+  setup_perm_client_env
 }
 
 main
