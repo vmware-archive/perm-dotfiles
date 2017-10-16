@@ -165,6 +165,7 @@ function write_bosh_target() (
   local bosh_deployment
   local bosh_gw_user
   local bosh_gw_host
+  local bosh_gw_private_key
   local bosh_gw_private_key_contents
   local bosh_lite_domain
 
@@ -202,6 +203,7 @@ function write_bosh_target() (
   bosh_deployment="cf"
   bosh_gw_user="jumpbox"
   bosh_gw_host="$bosh_ip"
+  bosh_gw_private_key="${TMPDIR:-/tmp}/${env_name}.pem"
   bosh_gw_private_key_contents="$(bosh interpolate "$creds_path" --path /jumpbox_ssh/private_key)"
 
   credhub_ca="$(bosh interpolate "$creds_path" --path /credhub_ca/ca)"
@@ -218,6 +220,9 @@ function write_bosh_target() (
   cf_username="admin"
   cf_password="$(credhub get -n /bosh-lite/cf/cf_admin_password --output-json | jq -r -e .value)"
 
+  echo "$bosh_gw_private_key_contents" > "$bosh_gw_private_key"
+  chmod 600 "$bosh_gw_private_key"
+
   cat << EOF > "$env_path"
 export BOSH_CA_CERT="$bosh_ca_cert"
 export BOSH_CLIENT="$bosh_admin_username"
@@ -226,7 +231,7 @@ export BOSH_ENVIRONMENT="$bosh_ip"
 export BOSH_DEPLOYMENT="$bosh_deployment"
 export BOSH_GW_USER="$bosh_gw_user"
 export BOSH_GW_HOST="$bosh_gw_host"
-export BOSH_GW_PRIVATE_KEY_CONTENTS="$bosh_gw_private_key_contents"
+export BOSH_GW_PRIVATE_KEY="$bosh_gw_private_key"
 export BOSH_LITE_DOMAIN="$bosh_lite_domain"
 
 function cf_login() {
