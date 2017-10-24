@@ -61,6 +61,12 @@ CASK_PKGS=(
   spotify
   textmate
 )
+PYTHON_PKGS=(
+  ipython
+  neovim
+  pip
+  setuptools
+)
 SERVICES=(
   mariadb
   postgres
@@ -116,6 +122,17 @@ brew_packages() {
   echo "Finished installing/upgrading brew packages"
 }
 
+install_python_packages() {
+  echo "Installing python packages..."
+
+  for pkg in "${PYTHON_PKGS[@]}"; do
+    pip2 install --upgrade "$pkg"
+    pip3 install --upgrade "$pkg"
+  done
+
+  echo "Finished installing/upgrading python packages"
+}
+
 start_services() {
   echo "Adding startup services..."
   for service in "${SERVICES[@]}"; do
@@ -129,8 +146,6 @@ extra_install_steps() {
   install_bbl
   install_lastpass
   setup_fzf
-  setup_neovim
-  setup_ipython
   setup_ide_prefs
   echo "Finished finalizing dependency installation"
 }
@@ -180,16 +195,6 @@ setup_fzf() {
   /usr/local/opt/fzf/install --completion --key-bindings --no-update-rc
 }
 
-setup_neovim() {
-  pip2 install neovim
-  pip3 install neovim
-}
-
-setup_ipython() {
-  pip2 install ipython
-  pip3 install ipython
-}
-
 setup_ide_prefs() {
   pushd "${WORKSPACE}/pivotal_ide_prefs" > /dev/null
     cli/bin/ide_prefs install --ide=gogland
@@ -197,9 +202,10 @@ setup_ide_prefs() {
 }
 
 main() {
-  # install_brew
-  # brew_packages
-  # install_ruby
+  install_brew
+  brew_packages
+  install_python_packages
+  install_ruby
   setup_workspace
   extra_install_steps
   start_services
