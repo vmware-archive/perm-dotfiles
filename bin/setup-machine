@@ -68,10 +68,10 @@ SERVICES=(
 REPOS=(
   cloudfoundry/cloud_controller_ng
   iredelmeier/vim-config
-  pivotal-cf/perm-ci
+  cloudfoundry-incubator/perm-ci
   pivotal-cf/perm-deployments
-  pivotal-cf/perm-rb
-  pivotal-cf/perm-release
+  cloudfoundry-incubator/perm-rb
+  cloudfoundry-incubator/perm-release
   pivotal/pivotal_ide_prefs
 )
 RUBY_VERSIONS=(
