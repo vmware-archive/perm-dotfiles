@@ -26,10 +26,15 @@ function deploy_cf() (
 
   export BOSH_DEPLOYMENT="$bosh_deployment"
 
+  pushd "$CF_DEPLOYMENT_REPO" > /dev/null
+    git pull -r
+  popd > /dev/null
+
   bosh -n \
     deploy --skip-drain ~/workspace/cf-deployment/cf-deployment.yml \
     -v system_domain="$system_domain" \
     -v perm_version="$perm_version" \
+    -o "${PERM_CI_REPO}/cf-deployment-operations/undo-metron-addon.yml" \
     -o "${CAPI_CI_REPO}/cf-deployment-operations/skip-cert-verify.yml" \
     -o "${CAPI_CI_REPO}/cf-deployment-operations/use-latest-stemcell.yml" \
     -o "${CF_DEPLOYMENT_REPO}/operations/use-compiled-releases.yml" \
