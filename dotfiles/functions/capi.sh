@@ -17,6 +17,10 @@ source "${CWD}/bosh.sh"
 function create_capi_release_for_perm() (
   set -eu
 
+  pushd "$CAPI_RELEASE_REPO" > /dev/null
+    git pull -r
+  popd > /dev/null
+
   rm -rf "$CAPI_RELEASE_DIR"
   cp -R "$CAPI_RELEASE_REPO" "$CAPI_RELEASE_DIR"
 
