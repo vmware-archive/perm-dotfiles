@@ -4,6 +4,7 @@ PERM_RELEASE_NAME="perm"
 
 WORKSPACE="${HOME}/workspace"
 PERM_RELEASE_REPO="${WORKSPACE}/perm-release"
+PERM_CI_REPO="${WORKSPACE}/perm-ci"
 
 TMPDIR="${TMPDIR:-/tmp}"
 PERM_CERTS_DIR="${TMPDIR}/perm-certs"
@@ -100,4 +101,27 @@ function install_and_run_perm() (
 
   install_perm
   run_perm
+)
+
+function run_perm_tests() (
+  set -e
+
+  local database
+  local usage
+
+  usage="Usage: \`run_perm_tests <mysql|mariadb>\`"
+  database="$1"
+
+  if [[ "$database" != "mysql" && "$database" != "mariadb" ]]; then
+    echo "$usage"
+    exit 1
+  fi
+
+  echo "Running perm tests with database ${database}..."
+
+  docker run --rm \
+    -v "${PERM_RELEASE_REPO}:/go/gopath" \
+    -v "${PERM_CI_REPO}:/tmp/perm-ci" \
+    --entrypoint /tmp/perm-ci/tasks/test-server/task.sh \
+    "cfperm/requirements:${database}"
 )
