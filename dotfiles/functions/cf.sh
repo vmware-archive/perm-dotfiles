@@ -28,6 +28,7 @@ function deploy_cf() (
 
   pushd "$CF_DEPLOYMENT_REPO" > /dev/null
     git pull -r
+    ./scripts/update
   popd > /dev/null
 
   bosh -n \
@@ -42,6 +43,7 @@ function deploy_cf() (
     -o "${PERM_CI_REPO}/cf-deployment-operations/add-bpm.yml" \
     -o "${PERM_CI_REPO}/cf-deployment-operations/add-perm.yml" \
     -o "${PERM_CI_REPO}/cf-deployment-operations/add-perm-monitor-api-sidecar.yml" \
+    -o "${PERM_CI_REPO}/cf-deployment-operations/add-cloud-controller-migrator-errand.yml" \
     -o "${CAPI_CI_REPO}/cf-deployment-operations/use-latest-capi.yml"
 )
 
