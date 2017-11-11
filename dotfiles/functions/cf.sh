@@ -42,7 +42,7 @@ function deploy_cf() (
     -o "${PERM_CI_REPO}/cf-deployment-operations/add-bpm.yml" \
     -o "${PERM_CI_REPO}/cf-deployment-operations/add-perm.yml" \
     -o "${PERM_CI_REPO}/cf-deployment-operations/add-perm-monitor-api-sidecar.yml" \
-    -o "${PERM_CI_REPO}/cf-deployment-operations/add-cloud-controller-migrator-errand.yml" \
+    -o "${PERM_CI_REPO}/cf-deployment-operations/add-cc-to-perm-migrator-errand.yml" \
     -o "${CAPI_CI_REPO}/cf-deployment-operations/use-latest-capi.yml"
 )
 
