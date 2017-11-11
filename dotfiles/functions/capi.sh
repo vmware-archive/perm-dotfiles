@@ -19,6 +19,7 @@ function create_capi_release_for_perm() (
 
   pushd "$CAPI_RELEASE_REPO" > /dev/null
     git pull -r
+    "${CAPI_RELEASE_REPO}/scripts/update"
   popd > /dev/null
 
   rm -rf "$CAPI_RELEASE_DIR"

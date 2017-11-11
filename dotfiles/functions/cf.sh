@@ -28,7 +28,6 @@ function deploy_cf() (
 
   pushd "$CF_DEPLOYMENT_REPO" > /dev/null
     git pull -r
-    ./scripts/update
   popd > /dev/null
 
   bosh -n \
