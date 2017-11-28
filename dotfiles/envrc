@@ -6,6 +6,7 @@ set -o pipefail
 function setup_perm_paths() {
   export PERM_RB_PATH="${HOME}/workspace/perm-rb"
   export PERM_GOPATH="${HOME}/workspace/perm-release"
+  export PATH="${PATH}:${PERM_GOPATH}/bin"
 }
 
 function setup_perm_client_env() {
