@@ -49,6 +49,7 @@ BREW_PKGS=(
 CASK_PKGS=(
   docker-toolbox
   firefox
+  flux
   flycut
   gogland
   google-chrome
@@ -60,6 +61,7 @@ CASK_PKGS=(
   slack
   spotify
   textmate
+  vagrant
 )
 PYTHON_PKGS=(
   ipython
