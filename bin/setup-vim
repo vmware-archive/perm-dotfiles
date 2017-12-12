@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -eu
+
+VIM_DIR="${HOME}/workspace/vim-config"
+VIM_HOME="${HOME}/.vim"
+
+if [[ ! -e "$VIM_DIR" ]]; then
+  git clone git@github.com:iredelmeier/vim-config "$VIM_DIR"
+fi
+
+ln -sfn "$VIM_DIR" "$VIM_HOME"
+
+ln -sfn "${VIM_HOME}/vimrc" "${HOME}/.vimrc"
+touch "${VIM_HOME}/vimrc.local"
+ln -sfn "${VIM_HOME}/vimrc.local" "${HOME}/.vimrc.local"
+touch "${VIM_HOME}/vimrc.local.plugins"
+ln -sfn "${VIM_HOME}/vimrc.local.plugins" "${HOME}/.vimrc.local.plugins"
+
+mkdir -p "${HOME}/.config"
+rm -rf "${HOME}/.config/nvim"
+ln -sfn "$VIM_HOME" "${HOME}/.config/nvim"
+
+vim +PlugUpgrade +PlugUpdate +qall

@@ -1,8 +1,8 @@
-.PHONY: all bin dotfiles setup test
+.PHONY: all bin dotfiles setup test vim
 
 CWD := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-all: bin dotfiles setup
+all: bin dotfiles setup vim
 
 bin:
 	for file in $(CWD)/bin/*; do \
@@ -19,3 +19,6 @@ setup:
 
 test:
 	$(CWD)/test.sh
+
+vim:
+	$(CWD)/bin/setup-vim
