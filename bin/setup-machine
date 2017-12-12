@@ -9,6 +9,7 @@ set -eu
 WORKSPACE="${HOME}/workspace"
 TAPS=(
   caskroom/cask
+  caskroom/fonts
   cloudfoundry/tap
   git-duet/tap
 )
@@ -51,11 +52,11 @@ CASK_PKGS=(
   firefox
   flux
   flycut
-  gogland
+  font-dejavu-sans
+  goland
   google-chrome
   google-cloud-sdk
   iterm2
-  mendeley-desktop
   rubymine
   shiftit
   slack
