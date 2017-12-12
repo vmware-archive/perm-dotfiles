@@ -75,13 +75,21 @@ SERVICES=(
   postgres
 )
 REPOS=(
-  cloudfoundry/cloud_controller_ng
-  iredelmeier/vim-config
+  cloudfoundry/bosh-deployment
+  cloudfoundry/capi-ci
+  cloudfoundry/capi-env-pool
+  cloudfoundry/capi-release
+  cloudfoundry/cf-deployment
+  cloudfoundry/cf-deployment
   cloudfoundry-incubator/perm-ci
-  pivotal-cf/perm-deployments
   cloudfoundry-incubator/perm-rb
   cloudfoundry-incubator/perm-release
+  iredelmeier/vim-config
   pivotal/pivotal_ide_prefs
+  pivotal-cf/perm-deployments
+  pivotal-cf/perm-pws-ci
+  pivotal-cf/prod-aws
+  pivotal-cloudops/cf-deployment-cloudops
 )
 RUBY_VERSIONS=(
   "ruby 2.4.2"
