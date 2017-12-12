@@ -90,6 +90,7 @@ REPOS=(
   pivotal-cf/perm-pws-ci
   pivotal-cf/prod-aws
   pivotal-cloudops/cf-deployment-cloudops
+  pivotal-cloudops/cloudops-ci
 )
 RUBY_VERSIONS=(
   "ruby 2.4.2"
