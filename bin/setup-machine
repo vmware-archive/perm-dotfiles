@@ -42,6 +42,7 @@ BREW_PKGS=(
   the_silver_searcher
   thefuck
   tig
+  tree
   watch
   xhyve
   zsh
