@@ -85,6 +85,7 @@ REPOS=(
   cloudfoundry-incubator/perm-ci
   cloudfoundry-incubator/perm-rb
   cloudfoundry-incubator/perm-release
+  cppforlife/jumpbox-deployment
   iredelmeier/vim-config
   pivotal/pivotal_ide_prefs
   pivotal-cf/perm-ci-credentials
