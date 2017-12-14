@@ -71,6 +71,9 @@ PYTHON_PKGS=(
   pip
   setuptools
 )
+GO_PKGS=(
+  github.com/onsi/ginkgo
+)
 SERVICES=(
   mariadb
   postgres
@@ -148,6 +151,16 @@ install_python_packages() {
   echo "Finished installing/upgrading python packages"
 }
 
+install_go_packages() {
+  echo "Installing go packages..."
+
+  for pkg in "${GO_PKGS[@]}"; do
+    go get -u "$pkg"
+  done
+
+  echo "Finished installing/upgrading go packages"
+}
+
 start_services() {
   echo "Adding startup services..."
   for service in "${SERVICES[@]}"; do
@@ -220,6 +233,7 @@ main() {
   install_brew
   brew_packages
   install_python_packages
+  install_go_packages
   install_ruby
   setup_workspace
   extra_install_steps
