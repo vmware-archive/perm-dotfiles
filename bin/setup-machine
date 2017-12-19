@@ -84,7 +84,6 @@ REPOS=(
   cloudfoundry/capi-env-pool
   cloudfoundry/capi-release
   cloudfoundry/cf-deployment
-  cloudfoundry/cf-deployment
   cloudfoundry-incubator/perm-ci
   cloudfoundry-incubator/perm-rb
   cloudfoundry-incubator/perm-release
