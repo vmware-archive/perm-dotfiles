@@ -42,6 +42,8 @@ BREW_PKGS=(
   the_silver_searcher
   thefuck
   tig
+  tmate
+  tmux
   tree
   watch
   xhyve
