@@ -34,16 +34,23 @@ function deploy_cf() (
     deploy --skip-drain ~/workspace/cf-deployment/cf-deployment.yml \
     -v system_domain="$system_domain" \
     -v perm_version="$perm_version" \
-    -o "${PERM_CI_REPO}/cf-deployment-operations/undo-metron-addon.yml" \
+    -o "${CF_DEPLOYMENT_REPO}/operations/workaround/undo-metron-add-on.yml" \
     -o "${CAPI_CI_REPO}/cf-deployment-operations/skip-cert-verify.yml" \
     -o "${CAPI_CI_REPO}/cf-deployment-operations/use-latest-stemcell.yml" \
-    -o "${CF_DEPLOYMENT_REPO}/operations/use-compiled-releases.yml" \
+    -o "${CF_DEPLOYMENT_REPO}/operations/experimental/enable-bpm.yml" \
+    -o "${CF_DEPLOYMENT_REPO}/operations/experimental/skip-consul-cell-registrations.yml" \
+    -o "${CF_DEPLOYMENT_REPO}/operations/experimental/skip-consul-locks.yml" \
+    -o "${CF_DEPLOYMENT_REPO}/operations/experimental/use-bosh-dns.yml" \
+    -o "${CF_DEPLOYMENT_REPO}/operations/experimental/disable-consul.yml" \
+    -o "${PERM_CI_REPO}/cf-deployment-operations/workaround/reenable-consul-stub.yml" \
     -o "${CF_DEPLOYMENT_REPO}/operations/bosh-lite.yml" \
-    -o "${PERM_CI_REPO}/cf-deployment-operations/add-bpm.yml" \
+    -o "${PERM_CI_REPO}/cf-deployment-operations/workaround/disable-consul-bosh-lite.yml" \
+    -o "${CF_DEPLOYMENT_REPO}/operations/use-compiled-releases.yml" \
     -o "${PERM_CI_REPO}/cf-deployment-operations/add-perm.yml" \
     -o "${PERM_CI_REPO}/cf-deployment-operations/add-perm-monitor-api-sidecar.yml" \
     -o "${PERM_CI_REPO}/cf-deployment-operations/add-cc-to-perm-migrator-errand.yml" \
-    -o "${CAPI_CI_REPO}/cf-deployment-operations/use-latest-capi.yml"
+    -o "${CAPI_CI_REPO}/cf-deployment-operations/use-latest-capi.yml" \
+    "$@"
 )
 
 function run_cats() (
