@@ -6,5 +6,8 @@ authors:
   br: Bruce Ricard; bricard
   gc: Greg Cobb; gcobb
   lc: Lisa Cho; lcho
+  jp: Jeff Pak
 email:
   domain: pivotal.io
+email_addresses:
+  jp: jeffrey.pak@emc.com
