@@ -286,13 +286,13 @@ function write_bosh_target() (
 
   credhub_ca="$(bosh interpolate "$creds_path" --path /credhub_ca/ca)"
   credhub_server="https://${bosh_ip}:8844"
-  credhub_username="credhub-cli"
-  credhub_password="$(bosh interpolate "$creds_path" --path /credhub_cli_password)"
+  credhub_client="credhub-admin"
+  credhub_secret="$(bosh interpolate "$creds_path" --path /credhub_admin_client_secret)"
 
   CREDHUB_CA_CERT="${credhub_ca}\n${uaa_ca}" \
     CREDHUB_SERVER="$credhub_server" \
-    CREDHUB_USERNAME="$credhub_username" \
-    CREDHUB_PASSWORD="$credhub_password" \
+    CREDHUB_CLIENT="$credhub_client" \
+    CREDHUB_SECRET="$credhub_secret" \
     login_to_credhub
 
   cf_username="admin"
