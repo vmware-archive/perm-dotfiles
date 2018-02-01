@@ -61,6 +61,7 @@ CASK_PKGS=(
   google-cloud-sdk
   iterm2
   rubymine
+  sequel-pro
   shiftit
   slack
   spotify
