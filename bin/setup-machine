@@ -76,6 +76,7 @@ PYTHON_PKGS=(
 )
 GO_PKGS=(
   github.com/onsi/ginkgo
+  code.cloudfoundry.org/perm-go
 )
 SERVICES=(
   mariadb
@@ -88,6 +89,7 @@ REPOS=(
   cloudfoundry/capi-release
   cloudfoundry/cf-deployment
   cloudfoundry-incubator/perm-ci
+  cloudfoundry-incubator/perm-protos
   cloudfoundry-incubator/perm-rb
   cloudfoundry-incubator/perm-release
   cppforlife/jumpbox-deployment
