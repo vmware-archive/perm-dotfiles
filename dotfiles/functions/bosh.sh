@@ -41,6 +41,7 @@ function target_ci_bosh_lite() {
   temp_dir="$(mktemp -d)"
   env_path="${temp_dir}/env.sh"
 
+  echo "Writing target to ${env_path}"
   write_bosh_target "$env_name" "$temp_dir" "$env_path"
   exit_code="$?"
 
@@ -116,15 +117,8 @@ function write_bosh_target() (
   credhub_client="credhub-admin"
   credhub_secret="$(bosh interpolate "$creds_path" --path /credhub_admin_client_secret)"
 
-  CREDHUB_CA_CERT="${credhub_ca}\n${uaa_ca}" \
-    CREDHUB_SERVER="$credhub_server" \
-    CREDHUB_CLIENT="$credhub_client" \
-    CREDHUB_SECRET="$credhub_secret" \
-    login_to_credhub
-
   cf_username="admin"
-
-  if cf_password="$(credhub get -n /bosh-lite/cf/cf_admin_password --output-json | jq -r -e .value)"; then
+  if cf_password="$(CREDHUB_CA_CERT="${credhub_ca}\n${uaa_ca}" CREDHUB_SERVER="$credhub_server" CREDHUB_CLIENT="$credhub_client" CREDHUB_SECRET="$credhub_secret" credhub get -n /bosh-lite/cf/cf_admin_password --output-json | jq -r -e .value)"; then
     cf_deployed_successfully="true"
   fi
 
