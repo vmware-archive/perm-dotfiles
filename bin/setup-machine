@@ -60,6 +60,7 @@ CASK_PKGS=(
   google-chrome
   google-cloud-sdk
   iterm2
+  java
   rubymine
   sequel-pro
   shiftit
