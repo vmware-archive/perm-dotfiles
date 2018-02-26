@@ -129,7 +129,7 @@ function upload_releases_and_deploy_cf() (
 
   create_and_upload_capi_release_for_perm
   create_and_upload_perm_release
-  deploy_cf
+  deploy_cf "$@"
 )
 
 function delete_orgs() (
