@@ -31,3 +31,6 @@
 [url "git@github.com:"]
   pushInsteadOf = https://github.com/
   pushInsteadOf = git://github.com/
+
+[commit]
+  template = "/Users/pivotal/.git-tracker-story"
