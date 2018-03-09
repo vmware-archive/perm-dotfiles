@@ -51,7 +51,7 @@ BREW_PKGS=(
   zsh-completions
 )
 CASK_PKGS=(
-  docker-toolbox
+  docker
   firefox
   flux
   flycut
