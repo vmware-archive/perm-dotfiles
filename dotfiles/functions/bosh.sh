@@ -118,6 +118,9 @@ function write_bosh_target() (
   credhub_secret="$(bosh interpolate "$creds_path" --path /credhub_admin_client_secret)"
 
   cf_username="admin"
+
+  rm -rf ~/.credhub
+
   if cf_password="$(CREDHUB_CA_CERT="${credhub_ca}\n${uaa_ca}" CREDHUB_SERVER="$credhub_server" CREDHUB_CLIENT="$credhub_client" CREDHUB_SECRET="$credhub_secret" credhub get -n /bosh-lite/cf/cf_admin_password --output-json | jq -r -e .value)"; then
     cf_deployed_successfully="true"
   fi
