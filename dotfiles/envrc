@@ -12,6 +12,9 @@ function setup_perm_paths() {
 function setup_perm_client_env() {
   export TEST_MYSQL_USERNAME="root"
   export TEST_MYSQL_PASSWORD="password"
+
+  export PERM_TEST_SQL_DB_USERNAME="$TEST_MYSQL_USERNAME"
+  export PERM_TEST_SQL_DB_PASSWORD="$TEST_MYSQL_PASSWORD"
 }
 
 function main() {
