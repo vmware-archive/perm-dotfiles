@@ -28,7 +28,7 @@ BREW_PKGS=(
   go
   htop
   jq
-  mariadb
+  "mariadb@10.1"
   neovim
   postgres
   protobuf
