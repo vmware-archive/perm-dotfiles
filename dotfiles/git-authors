@@ -8,7 +8,10 @@ authors:
   lc: Lisa Cho; lcho
   sl: Slawek Ligus; sligus
   jp: Jeff Pak
+  ep: Eric Promislow
+  cs: Chris Selzo; cselzo
 email:
   domain: pivotal.io
 email_addresses:
   jp: jeffrey.pak@emc.com
+  ep: eric.promislow@suse.com
