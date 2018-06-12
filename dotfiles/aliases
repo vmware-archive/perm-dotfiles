@@ -20,8 +20,10 @@ fi
 if [[ $(command -v xdg-open) ]]; then
   alias open="xdg-open"
 fi
-
+alias g="git"
+alias gci="git duet-commit"
 alias gst="git status"
+alias gco="git checkout"
 
 alias pu="pushd"
 alias po="popd"
