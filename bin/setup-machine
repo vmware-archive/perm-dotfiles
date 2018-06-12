@@ -172,6 +172,8 @@ install_go_packages() {
 install_ruby_packages() {
   echo "Installing ruby packages..."
 
+  export PATH="${HOME}/.rubies/ruby-2.4.2/bin:${PATH}"
+
   for pkg in "${GEM_PKGS[@]}"; do
     gem install "$pkg"
   done
@@ -252,8 +254,8 @@ main() {
   brew_packages
   install_python_packages
   install_go_packages
-  install_ruby_packages
   install_ruby
+  install_ruby_packages
   setup_workspace
   extra_install_steps
   start_services
