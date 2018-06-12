@@ -29,3 +29,9 @@
 1. Add Flux, Flycut, and ShiftIt to the "Login Items"
 1. Customize ITerm colours, fonts, alarms, etc.
 1. [Play crosswords](https://nytimes.crosswords) while you wait
+
+Note: if any installed application is not showing up in osx spotlight, run the following (reloads spotlight indexing)
+```
+sudo mdutil -a -i off
+sudo mdutil -a -i on
+```
