@@ -7,7 +7,7 @@ set -eu
 # - add flycut, shiftit, etc to login items
 
 WORKSPACE="${HOME}/workspace"
-MARIADB="mariadb@10.1"
+MARIADB="mariadb@10.2"
 TAPS=(
   caskroom/cask
   caskroom/fonts
