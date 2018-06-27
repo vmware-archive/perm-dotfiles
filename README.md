@@ -11,20 +11,16 @@
     - Customize the Dock
     - Mute the OS alarm bell
     - ...etc.
-1. Add your SSH key to the machine
-1. [Install Homebrew](https://brew.sh)
-    - May require you to install xcode-tools independently
-1. Ensure that Homebrew is correctly installed: `brew doctor`
-1. Install git if necessary: `which git || brew install git`
-1. Start installing our dotfiles:
+1. Add your SSH key and run the following:
     ```
-    mkdir -p ~/workspace
+    mkdir ~/workspace
     cd ~/workspace
     git clone git@github.com:pivotal-cf/perm-dotfiles
     cd perm-dotfiles
     make
     ```
-    - You may need to re-run `make` a few times due to MacOS security restrictions and other similar problems    
+    - You may need to re-run `make` a few times due to MacOS security restrictions and other similar problems
+1. Run `brew link mariadb@<x.x> -f` to namespace mariadb binary to `mysql`
 1. Grant Flycut and ShiftIt "Accessibility" permisisons
 1. Add Flux, Flycut, and ShiftIt to the "Login Items"
 1. Customize ITerm colours, fonts, alarms, etc.
