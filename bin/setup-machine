@@ -7,7 +7,6 @@ set -eu
 # - add flycut, shiftit, etc to login items
 
 WORKSPACE="${HOME}/workspace"
-MARIADB="mariadb@10.2"
 TAPS=(
   caskroom/cask
   caskroom/fonts
@@ -29,7 +28,7 @@ BREW_PKGS=(
   go
   htop
   jq
-  $MARIADB
+  mysql
   neovim
   postgres
   protobuf
@@ -84,7 +83,7 @@ GEM_PKGS=(
   grpc-tools
 )
 SERVICES=(
-  $MARIADB
+  mysql
   postgres
 )
 REPOS=(
