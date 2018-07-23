@@ -99,7 +99,6 @@ REPOS=(
   cppforlife/jumpbox-deployment
   iredelmeier/vim-config
   pivotal/pivotal_ide_prefs
-  pivotal-cf/perm-ci-credentials
   pivotal-cf/perm-deployments
   pivotal-cf/perm-pws-ci
   pivotal-cf/prod-aws
