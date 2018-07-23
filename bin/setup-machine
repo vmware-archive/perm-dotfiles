@@ -26,6 +26,7 @@ BREW_PKGS=(
   git
   git-duet
   go
+  gpg
   htop
   jq
   mysql
@@ -46,6 +47,7 @@ BREW_PKGS=(
   tmux
   tree
   watch
+  wget
   xhyve
   zsh
   zsh-completions
