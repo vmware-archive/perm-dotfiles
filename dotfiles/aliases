@@ -52,3 +52,4 @@ alias relite='(target_cf && cf rp retest)'
 # PSQL
 alias psql_bosh_lite='~/workspace/capi-release/scripts/psql-bosh-lite'
 
+alias gst="git status"
